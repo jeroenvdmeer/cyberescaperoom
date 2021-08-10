@@ -5,4 +5,4 @@
 4. Password hash exposed in error message (displayed on screen) (Sensitive Data Exposure / Security Misconfiguration)
 5. Password hash exposed in error message (find via dev tools) (Sensitive Data Exposure / Security Misconfiguration)
 6. Password hidden in front-end code (find via dev tools) (Broken Authentication)
-7. Trick browser by manually adding entry to local storage (Broken Authentication)
+7. Trick browser by manually adding entry to local storage (Insecure Deserialization)
