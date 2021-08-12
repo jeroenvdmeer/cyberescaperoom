@@ -1,5 +1,9 @@
 const api = async data => {
-    return await fetch("http://localhost:7071/api/login", {
+    const URL = process.env.REACT_APP_API
+        ? process.env.REACT_APP_API
+        : "/api/login"
+
+    return await fetch(URL, {
         method: "post",
         mode: "cors",
         cache: "no-cache",
