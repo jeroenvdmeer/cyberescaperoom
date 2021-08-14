@@ -11,41 +11,65 @@ import {
   Text,
   InputGroup,
   InputRightElement,
-  Icon
+  IconButton,
+  useToast
 } from "@chakra-ui/react"
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
+import Completed from "./Completed"
+import Success from "./Success"
 import api from "../utils/api"
 import getLevel from "../utils/levels"
+import Hints from "./Hints"
 
-const language = "nl"
+const LANG = "en"
+const ERROR5 = "Incorrect password (1e6947ac7fb3a9529a9726eb692c8cc5)"
 
 const Login = () => {
   const [level, setLevel] = useState(1)
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  const texts = getLevel(language, level)
-  console.log(texts)
+  const texts = getLevel(LANG, level)
+  const toast = useToast()
 
   if (!texts) {
-    return <span>🎉</span>
+    return <Completed />
+  }
+
+  const errorMessage = message => {
+    toast({
+      title: "Error",
+      description: message,
+      status: "error",
+      position: "bottom-right",
+      isClosable: true
+    })
   }
 
   const handleSubmit = async event => {
     event.preventDefault()
-    setIsLoading(true)
 
-    api({ level, username, password })
-    .then(response => {
-      setIsLoading(false)
-      return response.json()
-    })
-    .then(json => {
-      setIsLoggedIn(json.success)
-      setError(json.error)
-    })
+    if (texts.password) {
+      if (texts.password === password) {
+        setIsLoggedIn(true)
+      } else {
+        errorMessage("Incorrect password")
+      }
+
+    } else {
+      setIsLoading(true)
+      api({ level, username, password })
+      .then(response => response.json())
+      .then(json => {
+        setIsLoggedIn(json.success)
+        json.error && errorMessage(
+          (level === 5 && !json.success) ? ERROR5 : json.error
+        )
+      })
+      .finally(() => setIsLoading(false))
+    }
   }
 
   const nextLevel = () => {
@@ -65,33 +89,21 @@ const Login = () => {
         boxShadow="lg"
       >
         {isLoggedIn ? (
-          <Box textAlign="center">
-            <Text>{texts.success}</Text>
-            <Button
-              variantColor="orange"
-              variant="outline"
-              width="full"
-              mt={4}
-              onClick={() => nextLevel()}
-            >
-              Volgende
-            </Button>
-          </Box>
+          <Success text={texts.success} onClick={nextLevel} />
         ) : (
           <>
             <Box textAlign="center">
               <Heading>Level {level}</Heading>
             </Box>
             <Box my={4} textAlign="left">
-              <Text mb={4}>{texts.intro}</Text>
+              <Text mb={8}>{texts.intro}</Text>
+              <Hints hintTexts={texts.hints} />
               <form onSubmit={handleSubmit}>
-                {error && <Text>{error}</Text>}
                 <FormControl isRequired>
                   <FormLabel>Username</FormLabel>
                   <Input
                     type="text"
                     placeholder="admin"
-                    size="lg"
                     onChange={event => setUsername(event.currentTarget.value)}
                   />
                 </FormControl>
@@ -99,29 +111,21 @@ const Login = () => {
                   <FormLabel>Password</FormLabel>
                   <InputGroup>
                     <Input
-                      type={showPassword ? 'text' : 'password'}
+                      type={showPassword ? "text" : "password"}
                       placeholder="*******"
-                      size="lg"
                       onChange={event => setPassword(event.currentTarget.value)}
                     />
                     <InputRightElement width="3rem">
-                      <Button
-                        h="1.5rem"
+                      <IconButton
+                        h="1.75rem"
                         size="sm"
+                        icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
                         onClick={handlePasswordVisibility}
-                      >
-                        {showPassword ? (
-                          <Icon name="view-off" />
-                        ) : (
-                          <Icon name="view" />
-                        )}
-                      </Button>
+                      />
                     </InputRightElement>
                   </InputGroup>
                 </FormControl>
                 <Button
-                  variantColor="teal"
-                  variant="outline"
                   type="submit"
                   width="full"
                   mt={4}

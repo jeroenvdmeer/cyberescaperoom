@@ -1,36 +1,39 @@
+const PASSWORDS = [
+    "admin",
+    "Welkom01!",
+    "Zomer2021@",
+    "hdBue8ahA",
+    "Secret",
+    "Flamingo"
+]
+
+const ERRORS = {
+    INVALID_REQUEST: "Invalid request",
+    INVALID_USERNAME: "Invalid username",
+    INCORRECT_PASSWORD: "Incorrect password",
+    LEVEL6: "User-provided password does not match stored password for user 'admin' (1c55b68e7477a0e0ff47c3b0ba23c0d6)"
+}
+
 module.exports = async (context, req) => {
     const result = {
         status: 500,
         body: ""
     }
 
+    const { level, username, password } = req.body
+
     if (!isValidRequest(req)) {
-        result.body = error("Invalid request")
+        result.body = error(ERRORS.INVALID_REQUEST)
+        return result
     }
 
-    try {
-        const { level, username, password } = req.body
-        let validator = null
-
-        switch (level) {
-            case 1: validator = validateLevel1; break
-            case 2: validator = validateLevel2; break
-            case 3: validator = validateLevel3; break
-        }
-
-        if (validator !== null) {
-            const success = validator(
-                username.toLowerCase(),
-                password
-            )
-
-            result.status = 200
-            result.body = JSON.stringify({ success })
-        }
+    if (!isValidUsername(username)) {
+        result.body = error(ERRORS.INVALID_USERNAME)
+        return result
     }
-    catch (e) {
-        result.body = error(e)
-    }
+
+    result.status = 200
+    result.body = validate(level, password)
 
     return result
 }
@@ -47,16 +50,21 @@ const isValidRequest = req => {
     return false
 }
 
+const isValidUsername = username => username.toLowerCase() === "admin"
+
+const validate = (level, password) => {
+    const success = password === PASSWORDS[level - 1]
+    const result = { success }
+
+    if (success === false) {
+        result["error"] = ERRORS.INCORRECT_PASSWORD
+    }
+
+    if (level === 6 && success === false) {
+        result["fullDetails"] = ERRORS.LEVEL6
+    }
+
+    return JSON.stringify(result)
+}
+
 const error = message => JSON.stringify({ error: message })
-
-const validateLevel1 = (username, password) => {
-    return username === "admin" && password === "admin"
-}
-
-const validateLevel2 = (username, password) => {
-    return username === "admin" && password === "Welkom01!"
-}
-
-const validateLevel3 = (username, password) => {
-    return username === "admin" && password === "Zomer2021@"
-}
