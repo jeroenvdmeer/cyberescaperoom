@@ -21,18 +21,20 @@ export const updateLocalStorage = token => {
     const currentTokens = localStorage.getItem(KEY)
 
     try {
-        const tokens = JSON.parse(currentTokens)
+        let tokens = JSON.parse(currentTokens)
         
-        if (Array.isArray(tokens)) {
-            tokens.push(token)
-            localStorage.setItem(KEY, JSON.stringify(tokens))
-
-        } else {
+        if (!Array.isArray(tokens)) {
             clearLocalStorage()
+            updateLocalStorage(token)
+            return null
         }
+
+        tokens.push(token)
+        localStorage.setItem(KEY, JSON.stringify(tokens))
 
     } catch (e) {
         clearLocalStorage()
+        updateLocalStorage(token)
     }
 }
 

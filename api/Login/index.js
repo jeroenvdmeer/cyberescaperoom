@@ -47,8 +47,7 @@ const isValidRequest = req => {
         const level = (req.body.level && req.body.level > 0 && req.body.level < 8)
         const username = (req.body.username && req.body.username.length > 0)
         const password = (req.body.password && req.body.password.length > 0)
-        const tokens = level && req.body.tokens
-            && getLevel(req.body.tokens) === req.body.level
+        const tokens = level && getLevel(req.body.tokens) === req.body.level
 
         return level && username && password && tokens
     }
