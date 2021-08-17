@@ -1,9 +1,9 @@
-const api = async data => {
+const api = (url, data) => {
     const URL = process.env.REACT_APP_API
-        ? process.env.REACT_APP_API
-        : "/api/login"
+        ? process.env.REACT_APP_API + url
+        : url
 
-    return await fetch(URL, {
+    return fetch(URL, {
         method: "post",
         mode: "cors",
         cache: "no-cache",
@@ -14,4 +14,6 @@ const api = async data => {
     })
 }
 
-export default api
+export const loginApi = data => api("/api/login", data)
+
+export const tokensApi = data => api("/api/tokens", data)

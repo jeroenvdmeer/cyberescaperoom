@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import {
   Flex,
   Box,
@@ -17,9 +17,14 @@ import {
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
 import Completed from "./Completed"
 import Success from "./Success"
-import api from "../utils/api"
-import getLevel from "../utils/levels"
 import Hints from "./Hints"
+import { loginApi } from "../utils/api"
+import getLevelTexts from "../utils/levels"
+import {
+  getTokens,
+  getLevelFromLocalStorage,
+  updateLocalStorage
+} from "../utils/localstorage"
 
 const LANG = "en"
 const ERROR5 = "Incorrect password (1e6947ac7fb3a9529a9726eb692c8cc5)"
@@ -31,8 +36,13 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  const texts = getLevel(LANG, level)
+  const texts = getLevelTexts(LANG, level)
   const toast = useToast()
+
+  useEffect(() => {
+    const getLevel = async () => setLevel(await getLevelFromLocalStorage())
+    getLevel()
+  }, [])
 
   if (!texts) {
     return <Completed />
@@ -48,28 +58,28 @@ const Login = () => {
     })
   }
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault()
 
-    if (texts.password) {
-      if (texts.password === password) {
-        setIsLoggedIn(true)
-      } else {
-        errorMessage("Incorrect password")
-      }
-
+    if (texts.password && texts.password !== password) {
+      errorMessage("Incorrect password")
     } else {
-      setIsLoading(true)
-      api({ level, username, password })
-      .then(response => response.json())
-      .then(json => {
-        setIsLoggedIn(json.success)
-        json.error && errorMessage(
-          (level === 5 && !json.success) ? ERROR5 : json.error
-        )
-      })
-      .finally(() => setIsLoading(false))
+      login()
     }
+  }
+
+  const login = () => {
+    setIsLoading(true)
+    loginApi({ level, username, password, tokens: getTokens() })
+    .then(response => response.json())
+    .then(json => {
+      setIsLoggedIn(json.success)
+      json.success && updateLocalStorage(json.token)
+      json.error && errorMessage(
+        (level === 5 && !json.success) ? ERROR5 : json.error
+      )
+    })
+    .finally(() => setIsLoading(false))
   }
 
   const nextLevel = () => {
