@@ -5,7 +5,7 @@ import {
   Route
 } from "react-router-dom"
 import { ChakraProvider, Flex } from "@chakra-ui/react"
-import LanguageSwitcher from "./components/LanguageSwitcher"
+//import LanguageSwitcher from "./components/LanguageSwitcher"
 import ColorModeSwitcher from "./components/ColorModeSwitcher"
 import GitHubIcon from "./components/GitHubIcon"
 import Introduction from "./components/Introduction"
