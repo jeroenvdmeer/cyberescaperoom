@@ -5,9 +5,10 @@ const Success = ({ text, onClick }) => (
         <Text>{text}</Text>
         <Button
             width="full"
-            type="submit"
+            type="button"
             mt={4}
-            onClick={() => onClick()}
+            onClick={onClick}
+            autoFocus={true}
         >
             Next
         </Button>

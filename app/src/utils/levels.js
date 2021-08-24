@@ -30,7 +30,7 @@ const LEVELS = {
                 success: "Winning! Although finding clues in HTML code is rare, finding clues or even passwords and API keys in JavaScript code is actually not very uncommon. The combination of the developer tools and some creativity can get you a long way."
             },
             {
-                intro: <img src="/level4/banana.gif" alt="Banana" />,
+                intro: <center><img src="/lvl4/banana.gif" alt="Banana" /></center>,
                 hints: [
                     "Have you inspected all parts of the banana?",
                     "Try opening the image in a seperate tab and look for clues.",

@@ -1,7 +1,10 @@
 import { Text } from "@chakra-ui/react"
+import Container from "./Container"
 
 const Completed = () => (
-    <Text fontSize="6xl">🏆</Text>
+    <Container title="Success!" level={8}>
+        <Text fontSize="6xl" textAlign="center">🏆</Text>
+    </Container>
 )
 
 export default Completed

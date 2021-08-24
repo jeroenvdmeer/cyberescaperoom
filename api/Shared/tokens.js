@@ -10,8 +10,8 @@ const TOKENS = [
 
 const getToken = level => TOKENS[level - 1]
 
-const getLevel = tokens => {
-    let level = 1
+const getMaxLevel = tokens => {
+    let maxLevel = 1
 
     try {
         const tokensArray = JSON.parse(tokens)
@@ -26,15 +26,15 @@ const getLevel = tokens => {
             }
 
             if (tokensMatch) {
-                level = tokensArray.length + 1
+                maxLevel = tokensArray.length + 1
             }
         }
     } catch (e) {}
 
-    return level
+    return maxLevel
 }
 
 module.exports = {
     getToken,
-    getLevel
+    getMaxLevel
 }

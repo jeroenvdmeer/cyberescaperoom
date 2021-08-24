@@ -1,4 +1,4 @@
-const { getLevel } = require("../Shared/tokens")
+const { getMaxLevel } = require("../Shared/tokens")
 
 module.exports = async (context, req) => {
     const result = {
@@ -9,7 +9,7 @@ module.exports = async (context, req) => {
     const { tokens } = req.body
 
     if (tokens !== undefined) {
-        const level = Number(getLevel(tokens))
+        const level = Number(getMaxLevel(tokens))
 
         if (level > 0) {
             result.status = 200

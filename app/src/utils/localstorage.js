@@ -1,41 +1,49 @@
 import { tokensApi } from "./api" 
 
 const KEY = "tokens"
+const STARTING_LEVEL = 1
 const NO_TOKENS = "[]"
 
-export const getTokens = () => localStorage.getItem(KEY)
+const getTokens = () => localStorage.getItem(KEY)
 
-export const getLevelFromLocalStorage = async () => {
+const getMaxLevel = async () => {
     const tokens = localStorage.getItem(KEY)
-    let level = 1
 
-    await tokensApi({ tokens })
-    .then(response => response.json())
-    .then(json => level = json.level)
-    .catch(e => clearLocalStorage())
+    if (tokens) {
+        return await tokensApi({ tokens })
+        .then(response => response.json())
+        .then(json => json.level)
+        .catch(e => clear())
+    }
 
-    return level
+    return STARTING_LEVEL
 }
 
-export const updateLocalStorage = token => {
+const update = (level, token) => {
     const currentTokens = localStorage.getItem(KEY)
 
     try {
         let tokens = JSON.parse(currentTokens)
         
         if (!Array.isArray(tokens)) {
-            clearLocalStorage()
-            updateLocalStorage(token)
+            clear()
+            update(level, token)
             return null
         }
 
-        tokens.push(token)
+        tokens[level - 1] = token
         localStorage.setItem(KEY, JSON.stringify(tokens))
 
     } catch (e) {
-        clearLocalStorage()
-        updateLocalStorage(token)
+        clear()
+        update(token)
     }
 }
 
-export const clearLocalStorage = () => localStorage.setItem(KEY, NO_TOKENS)
+const clear = () => localStorage.setItem(KEY, NO_TOKENS)
+
+const useLocalstorage = () => {
+    return { getTokens, getMaxLevel, update, clear }
+}
+
+export default useLocalstorage
