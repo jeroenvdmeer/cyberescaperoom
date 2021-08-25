@@ -1,0 +1,16 @@
+{
+    "routes": [
+        {
+            "route": "/levels/*",
+            "rewrite": "/index.html"
+        },
+        {
+            "route": "/levels",
+            "redirect": "/",
+            "statusCode": 301
+        }
+    ],
+    "globalHeaders": {
+        "content-security-policy": "default-src 'self'"
+    }
+}
