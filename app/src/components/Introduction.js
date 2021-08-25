@@ -4,11 +4,16 @@ import Container from "./Container"
 
 const Introduction = () => {
   const history = useHistory()
-  const start = () => history.push("/level1")
+  const start = () => history.push("/levels/1")
 
   return (
     <Container title="Welcome!">
-      <Text>Hello!</Text>
+      <Text>
+        In this cyber escape room you'll be challenged to break through seven
+        login forms. The difficulty level increases gradually to push your
+        skill level. After completing each level information is presented about
+        preventing the vulnerabilties you've exploited. Good luck!
+      </Text>
       <Button
         type="button"
         width="full"
