@@ -29,7 +29,7 @@ const App = () => (
             <Introduction />
           </Route>
           {Array.from(Array(LEVELS).keys()).map(level => (
-            <Route path={`/level${level + 1}`} key={level}>
+            <Route path={`/levels/${level + 1}`} key={level}>
               <Login level={level + 1} />
             </Route>
           ))}

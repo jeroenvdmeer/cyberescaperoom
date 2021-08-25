@@ -41,8 +41,8 @@ const Container = ({ title, level, children }) => {
   : (
     <Redirect
       to={{
-        pathname: "/level" + maxLevel,
-        from: "/level" + level
+        pathname: "/levels/" + maxLevel,
+        from: "/levels/" + level
       }}
     />
   )

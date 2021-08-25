@@ -64,17 +64,19 @@ const Login = ({ level }) => {
 
   const nextLevel = () => {
     setIsLoggedIn(false)
-    history.push("/level" + (level + 1))
+    history.push("/levels/" + (level + 1))
   }
+
+  const { intro, hints, success, readMore } = texts
 
   return (
     <Container title={`Level ${level}`} level={level}>
       {isLoggedIn
-        ? <Success text={texts.success} onClick={nextLevel} />
+        ? <Success text={success} readMore={readMore} onClick={nextLevel} />
         : (
           <>
-            <Text mb={8}>{texts.intro}</Text>
-            <Hints hintTexts={texts.hints} />
+            <Text mb={8}>{intro}</Text>
+            <Hints hintTexts={hints} />
             <form onSubmit={handleSubmit}>
               <FormControl isRequired>
                 <FormLabel>Username</FormLabel>

@@ -12,7 +12,7 @@ export const Previous = ({ currentLevel }) => {
     const onClick = () => history.push(
         (currentLevel && currentLevel === 1)
             ? "/"
-            : "/level" + (currentLevel - 1)
+            : "/levels/" + (currentLevel - 1)
     )
 
     return currentLevel
@@ -22,7 +22,7 @@ export const Previous = ({ currentLevel }) => {
 
 export const Next = ({ currentLevel, maxLevel }) => {
     const history = useHistory()
-    const onClick = () => history.push("/level" + (currentLevel + 1))
+    const onClick = () => history.push("/levels/" + (currentLevel + 1))
     const props = currentLevel !== 7 ? null : {
         colorScheme: "green",
         autoFocus: true
