@@ -65,7 +65,6 @@ const Login = ({ level }) => {
   const nextLevel = () => {
     setIsLoggedIn(false)
     history.push("/level" + (level + 1))
-    console.log("/level" + (level + 1))
   }
 
   return (
