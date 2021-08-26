@@ -95,7 +95,7 @@ const LEVELS = {
             {
                 intro: "The grand finale! The password for this level is very strong. Can you find another way to login?",
                 hints: [
-                    "Only one hint this time. Have you figured out how each time you refresh the page you don't get redirected to level 1?"
+                    "Only one hint this time. Have you figured out what happened to the tokens your web browser received after completing the previous levels?"
                 ],
                 success: "Top!",
                 readMore: [
