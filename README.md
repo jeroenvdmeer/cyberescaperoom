@@ -1,8 +1,8 @@
-# Login
-1. Default password: admin/admin (Security Misconfiguration)
-2. Password hidden in source code (Broken Authentication)
-3. Password hidden in /level3/pwd.txt (via /level3/img.png) (Broken Access Control)
-4. Password hash exposed in error message (displayed on screen) (Sensitive Data Exposure / Security Misconfiguration)
-5. Password hash exposed in error message (find via dev tools) (Sensitive Data Exposure / Security Misconfiguration)
-6. Password hidden in front-end code (find via dev tools) (Broken Authentication)
-7. Trick browser by manually adding entry to local storage (Insecure Deserialization)
+# Cyber escape room
+The objective of this project is to provide a playful introduction to web application vulnerabilities in the [OWASP Top 10](https://owasp.org/www-project-top-ten/) while relying only on developer tools offered by modern web browsers. This makes the cyber escape room accessible for anyone who is interested web application vulnerabilities without the need to use specialized tools, such as intercepting proxies.
+
+## Demo
+The cyber escape room can be taken for a test drive on https://escape.jero.net/.
+
+## Technical background
+This application is designed to run on [Azure Static Web Apps](https://azure.microsoft.com/en-us/services/app-service/static/). The front-end application is available in the `/app` folder and is bootstrapped with [Create React App](https://github.com/facebook/create-react-app). The API is available in the `/api` folder and available as an [Azure Functions](https://azure.microsoft.com/en-us/services/functions/) app. When navigating in your computer's command line interface to the two folders and running `yarn start` will start the front-end and API.
