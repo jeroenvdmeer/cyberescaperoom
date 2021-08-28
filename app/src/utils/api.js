@@ -1,7 +1,7 @@
 const api = (url, data) => {
-    const URL = Number(window.location.port) === 443
-        ? url
-        : `//${window.location.hostname}:7071${url}`
+    const URL = Number(window.location.port) === 3000
+        ? `//${window.location.hostname}:7071${url}`
+        : url
 
     return fetch(URL, {
         method: "post",
