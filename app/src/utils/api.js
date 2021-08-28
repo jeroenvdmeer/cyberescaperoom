@@ -1,7 +1,7 @@
 const api = (url, data) => {
-    const URL = process.env.REACT_APP_API
-        ? process.env.REACT_APP_API + url
-        : url
+    const URL = Number(window.location.port) === 443
+        ? url
+        : `//${window.location.hostname}:7071${url}`
 
     return fetch(URL, {
         method: "post",
