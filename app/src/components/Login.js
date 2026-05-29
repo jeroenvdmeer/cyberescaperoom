@@ -1,13 +1,12 @@
 import React, { useState } from "react"
 import {
-  FormControl,
-  FormLabel,
+  Field,
   Input,
   Button,
-  CircularProgress,
+  Spinner,
   Text,
-  useToast
 } from "@chakra-ui/react"
+import { toaster } from "./ui/toaster"
 import Container from "./Container"
 import Completed from "./Completed"
 import Success from "./Success"
@@ -15,7 +14,7 @@ import Hints from "./Hints"
 import Password from "./Password"
 import getLevelTexts from "../utils/levels"
 import { useAuth } from "../utils/auth"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const LANG = "en"
 const ERROR5 = "Incorrect password (1e6947ac7fb3a9529a9726eb692c8cc5)"
@@ -27,20 +26,18 @@ const Login = ({ level }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const { login } = useAuth()
   const texts = getLevelTexts(LANG, level)
-  const history = useHistory()
-  const toast = useToast()
+  const navigate = useNavigate()
 
   if (!texts) {
     return <Completed />
   }
 
   const errorMessage = message => {
-    toast({
+    toaster.create({
       title: "Error",
       description: message,
-      status: "error",
-      position: "bottom-right",
-      isClosable: true
+      type: "error",
+      placement: "bottom-end",
     })
   }
 
@@ -64,7 +61,7 @@ const Login = ({ level }) => {
 
   const nextLevel = () => {
     setIsLoggedIn(false)
-    history.push("/levels/" + (level + 1))
+    navigate("/levels/" + (level + 1))
   }
 
   const { intro, hints, success, readMore } = texts
@@ -78,41 +75,33 @@ const Login = ({ level }) => {
             <Text mb={8}>{intro}</Text>
             <Hints hintTexts={hints} />
             <form onSubmit={handleSubmit}>
-              <FormControl required>
-                <FormLabel>Username</FormLabel>
+              <Field.Root required>
+                <Field.Label>Username</Field.Label>
                 <Input
                   type="text"
                   placeholder="admin"
                   onChange={event => setUsername(event.currentTarget.value)}
                 />
-              </FormControl>
-              <FormControl required mt={6}>
-                <FormLabel>Password</FormLabel>
+              </Field.Root>
+              <Field.Root required mt={6}>
+                <Field.Label>Password</Field.Label>
                 <Password
                   onChange={event => setPassword(event.currentTarget.value)}
                 />
-              </FormControl>
+              </Field.Root>
               <Button
                 type="submit"
                 width="full"
                 mt={4}
               >
-                {isLoading ? (
-                  <CircularProgress
-                    indeterminate
-                    size="24px"
-                    color="teal"
-                  />
-                ) : (
-                  "Sign In"
-                )}
+                {isLoading ? <Spinner size="sm" /> : "Sign In"}
               </Button>
             </form>
           </>
         )
       }
     </Container>
-  );
+  )
 }
 
 export default Login
