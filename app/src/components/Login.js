@@ -78,7 +78,7 @@ const Login = ({ level }) => {
             <Text mb={8}>{intro}</Text>
             <Hints hintTexts={hints} />
             <form onSubmit={handleSubmit}>
-              <FormControl isRequired>
+              <FormControl required>
                 <FormLabel>Username</FormLabel>
                 <Input
                   type="text"
@@ -86,7 +86,7 @@ const Login = ({ level }) => {
                   onChange={event => setUsername(event.currentTarget.value)}
                 />
               </FormControl>
-              <FormControl isRequired mt={6}>
+              <FormControl required mt={6}>
                 <FormLabel>Password</FormLabel>
                 <Password
                   onChange={event => setPassword(event.currentTarget.value)}
@@ -99,7 +99,7 @@ const Login = ({ level }) => {
               >
                 {isLoading ? (
                   <CircularProgress
-                    isIndeterminate
+                    indeterminate
                     size="24px"
                     color="teal"
                   />
@@ -112,7 +112,7 @@ const Login = ({ level }) => {
         )
       }
     </Container>
-  )
+  );
 }
 
 export default Login

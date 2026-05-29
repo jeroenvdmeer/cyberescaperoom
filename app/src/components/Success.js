@@ -16,7 +16,7 @@ const Success = ({ text, readMore, onClick }) => (
         <List>
             {Array.isArray(readMore) && readMore.map(link => (
                 <ListItem>
-                    <ListIcon as={ExternalLinkIcon} />
+                    <ListIcon asChild><ExternalLinkIcon /></ListIcon>
                     <Link href={link.url} isExternal={true}>{link.text}</Link>
                 </ListItem>
             ))}

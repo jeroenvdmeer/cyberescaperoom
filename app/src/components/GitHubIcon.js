@@ -16,13 +16,12 @@ const GitHubIcon = () => (
         href="https://www.github.com/jeroenvdmeer/cyberescaperoom"
     >
         <Icon
-            as={SVG}
             display="block"
             transition="color 0.2s"
             w="5"
             h="5"
             _hover={{ color: "gray.600" }}
-        />
+            asChild><SVG /></Icon>
     </Link>
 )
 
