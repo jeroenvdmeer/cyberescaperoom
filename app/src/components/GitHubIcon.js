@@ -11,7 +11,8 @@ const SVG = props => (
 
 const GitHubIcon = () => (
     <Link
-        isExternal
+        target="_blank"
+        rel="noopener noreferrer"
         aria-label="Visit the GitHub repository for this project"
         href="https://www.github.com/jeroenvdmeer/cyberescaperoom"
     >
