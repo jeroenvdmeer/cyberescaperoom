@@ -1,0 +1,44 @@
+version: 2
+updates:
+  # Frontend — /app
+  - package-ecosystem: "npm"
+    directory: "/app"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    groups:
+      react-ecosystem:
+        patterns:
+          - "react"
+          - "react-*"
+          - "@react-*"
+      chakra-ecosystem:
+        patterns:
+          - "@chakra-ui/*"
+          - "@emotion/*"
+          - "next-themes"
+      router:
+        patterns:
+          - "react-router*"
+      testing:
+        patterns:
+          - "@testing-library/*"
+          - "vitest"
+          - "@vitest/*"
+          - "jsdom"
+      build-tooling:
+        patterns:
+          - "vite"
+          - "@vitejs/*"
+
+  # Backend — /api (no deps now, but tracked for future additions)
+  - package-ecosystem: "npm"
+    directory: "/api"
+    schedule:
+      interval: "weekly"
+
+  # GitHub Actions versions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
