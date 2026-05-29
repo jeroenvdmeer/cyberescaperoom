@@ -1,10 +1,10 @@
 import { Text, Button } from "@chakra-ui/react"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Container from "./Container"
 
 const Introduction = () => {
-  const history = useHistory()
-  const start = () => history.push("/levels/1")
+  const navigate = useNavigate()
+  const start = () => navigate("/levels/1")
 
   return (
     <Container title="Welcome!">
@@ -21,7 +21,7 @@ const Introduction = () => {
         onClick={start}
         autoFocus={true}
       >
-        Lets go!      
+        Lets go!
       </Button>
     </Container>
   )
