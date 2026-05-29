@@ -1,6 +1,6 @@
 import React from "react"
 import { Box, Flex, Heading, Spacer, Spinner } from "@chakra-ui/react"
-import { Redirect } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import { Previous, Next } from "./NavigationButtons"
 import { useAuth } from "../utils/auth"
 
@@ -39,12 +39,7 @@ const Container = ({ title, level, children }) => {
       </Flex>
     )
   : (
-    <Redirect
-      to={{
-        pathname: "/levels/" + maxLevel,
-        from: "/levels/" + level
-      }}
-    />
+    <Navigate replace to={"/levels/" + maxLevel} />
   )
 }
 
