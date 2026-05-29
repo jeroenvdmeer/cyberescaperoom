@@ -1,0 +1,84 @@
+# Cyber Escape Room — CLAUDE.md
+
+An educational web app with 7 login-form challenges that teach web security concepts.
+Live at https://escape.jero.net/.
+
+## Project Structure
+
+```
+cyberescaperoom/
+├── app/          # React 19 SPA (Vite 8 / rolldown)
+├── api/          # Azure Functions backend (login API)
+├── docs/         # Project documentation
+└── .github/
+    ├── workflows/azure-static-web-apps.yml  # CI/CD — gates deploy on test+build
+    └── dependabot.yml
+```
+
+## Architecture
+
+### Frontend (`app/`)
+- **React 19** SPA built with **Vite 8** (rolldown bundler)
+- **Chakra UI v3** for UI components, **@emotion/react** for styling
+- **React Router v7** for client-side routing
+- **next-themes** for dark/light mode
+- Tests: **Vitest 4** + jsdom + @testing-library/react
+- Source files live in `app/src/`; entry point is `app/src/index.js`
+
+### Backend (`api/`)
+- **Azure Functions** (Node.js) providing the login API
+- Key files: `api/Login/index.js`, `api/ValidateTokens/index.js`, `api/Shared/tokens.js`
+
+### Deployment
+- Deployed to **Azure Static Web Apps**
+- The CI workflow (`.github/workflows/azure-static-web-apps.yml`) runs a `Test and Build` job that must pass before any deploy proceeds.
+
+## JSX-in-.js Setup
+
+All React component source files use the `.js` extension (not `.jsx`), even when containing JSX. Vite 8's Oxc transformer treats `.js` as plain JavaScript by default and excludes it from JSX transformation. To handle this:
+
+- `app/vite.config.js` defines a custom `enforce: 'pre'` plugin (`jsxInJs`) that runs Vite's `transformWithOxc` API over every `src/**/*.js` file with `lang: 'jsx'` and the React automatic runtime.
+- This pre-transform runs before the built-in Oxc/rolldown transform and `@vitejs/plugin-react`, so all downstream steps only ever see plain compiled JS.
+- The behaviour is identical across dev server, `vite build`, and the Vitest environment.
+
+**Do not rename `.js` files to `.jsx`** — the plugin handles transformation correctly as-is.
+
+## Commands
+
+- `yarn start` — start Vite dev server at http://localhost:5173
+- `yarn build` — production build to `app/build/`
+- `yarn test` — run tests in watch mode (local)
+- `yarn test run` — run tests once (used in CI)
+- `swa start http://localhost:5173 --run "yarn start" --app-location ./app --api ./api` — full local dev with Azure Functions API (requires `@azure/static-web-apps-cli` and `azure-functions-core-tools@3`)
+
+All yarn commands are run from the `app/` directory.
+
+## Critical Constraints
+
+### Build must never be minified
+`vite.config.js` has `build: { minify: false }`. This is intentional: students read
+the unminified source in browser DevTools as part of the educational challenges.
+**Do not enable minification under any circumstances.**
+
+### Do not fix intentional vulnerabilities
+The following are educational features, not bugs:
+- Hardcoded passwords in `api/Login/index.js`
+- Plain-text token storage in `localStorage` (`app/src/utils/localstorage.js`)
+- Client-side password check in `app/src/components/Login.js` (level 3)
+- MD5 hash in API error responses (`api/Login/index.js`, levels 5-6)
+- The HTML comment `<!-- Level 2: Welcome01! -->` in `app/index.html`
+
+Fixing any of these breaks the escape room challenges.
+
+## Claude Code Skills
+
+Skills available for this project:
+- `/run` — launch the app and verify a change works in the browser
+- `/verify` — confirm a fix or feature works end-to-end
+- `/code-review` — review the current diff for bugs and improvements
+- `/security-review` — security review of pending changes (use before merging)
+- `/frontend-design` — build polished frontend components
+- Chakra UI skills (from `chakra-ui.com/docs/get-started/ai/skills`):
+  - `chakra-ui-builder` — build new Chakra UI v3 components
+  - `chakra-ui-migrate` — guidance for Chakra UI v2→v3 migration patterns
+  - `chakra-ui-refactor` — review and improve existing Chakra UI components
