@@ -43,6 +43,17 @@ All React component source files use the `.js` extension (not `.jsx`), even when
 
 **Do not rename `.js` files to `.jsx`** — the plugin handles transformation correctly as-is.
 
+## Chakra UI v3 API notes
+
+This app is on Chakra v3; many v1/v2 APIs were removed (their imports build-fail or silently no-op). When editing components:
+- `IconButton` takes the icon as **children**, not an `icon` prop — and always needs `aria-label`.
+- No `CircularProgress` — use `Spinner` (or `ProgressCircle.Root`).
+- No `InputRightElement`/`InputLeftElement` — use `InputGroup` with the `endElement`/`startElement` prop.
+- Lists are `List.Root`/`List.Item` (not `List`/`ListItem`); forms are `Field.Root`/`Field.Label` (not `FormControl`/`FormLabel`).
+- Toasts: `toaster.create()` imported from `src/components/ui/toaster` (not the `useToast` hook).
+- Color-mode hooks (`useColorMode`, `useColorModeValue`) come from `src/components/ui/color-mode`, not `@chakra-ui/react`.
+- Verify what the installed version actually exports: `node -e "const c=require('@chakra-ui/react'); console.log('IconButton' in c)"` (run from `app/`).
+
 ## Commands
 
 - `yarn start` — start Vite dev server at http://localhost:5173
@@ -52,6 +63,12 @@ All React component source files use the `.js` extension (not `.jsx`), even when
 - `swa start http://localhost:5173 --run "yarn start" --app-location ./app --api ./api` — full local dev with Azure Functions API (requires `@azure/static-web-apps-cli` and `azure-functions-core-tools@3`)
 
 All yarn commands are run from the `app/` directory.
+
+## Testing notes
+
+- Component render tests need the `window.matchMedia` stub in `app/src/setupTests.js` (next-themes calls it; jsdom lacks it).
+- `@testing-library/dom` is a required peer of `@testing-library/react` — keep it in devDependencies.
+- `Container` renders a `Spinner` while `useAuth` is loading, so assert UI with async `await screen.findByRole(...)`; `localStorage.clear()` in `beforeEach` keeps auth from hitting `fetch`.
 
 ## Critical Constraints
 
@@ -78,7 +95,7 @@ Skills available for this project:
 - `/code-review` — review the current diff for bugs and improvements
 - `/security-review` — security review of pending changes (use before merging)
 - `/frontend-design` — build polished frontend components
-- Chakra UI skills (from `chakra-ui.com/docs/get-started/ai/skills`):
+- Chakra UI skills (from `chakra-ui.com/docs/get-started/ai/skills`) — best for *new component design*; for v3 API correctness on the installed version, prefer the export check in "Chakra UI v3 API notes" above:
   - `chakra-ui-builder` — build new Chakra UI v3 components
   - `chakra-ui-migrate` — guidance for Chakra UI v2→v3 migration patterns
   - `chakra-ui-refactor` — review and improve existing Chakra UI components
