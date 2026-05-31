@@ -36,7 +36,7 @@ const update = (level, token) => {
 
     } catch (e) {
         clear()
-        update(token)
+        update(level, token)
     }
 }
 
