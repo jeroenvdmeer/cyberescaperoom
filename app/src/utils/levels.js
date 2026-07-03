@@ -11,8 +11,8 @@ const LEVELS = {
                 success: "Good job! Trying the combination admin/admin is standard check any hacker would start with. This is because many software and devices are shipped with 'admin' as the default value for both the username and the password. Many times administrators forget to change these default values after installation, leaving the system open to unauthorised access.",
                 readMore: [
                     {
-                        text: "A6:2017-Security Misconfiguration",
-                        url: "https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration"
+                        text: "A02:2025-Security Misconfiguration",
+                        url: "https://owasp.org/Top10/2025/A02_2025-Security_Misconfiguration/"
                     }
                 ]
             },
@@ -26,8 +26,8 @@ const LEVELS = {
                 success: "Awesome! Although it's very unlikely you'll find passwords hidden in HTML code, inspecting front-end code (especially the JavaScript) is likely to provide clues of potential weaknesses and backdoors.",
                 readMore: [
                     {
-                        text: "A2:2017-Broken Authentication",
-                        url: "https://owasp.org/www-project-top-ten/2017/A2_2017-Broken_Authentication"
+                        text: "A07:2025-Authentication Failures",
+                        url: "https://owasp.org/Top10/2025/A07_2025-Authentication_Failures/"
                     }
                 ]
             },
@@ -42,8 +42,8 @@ const LEVELS = {
                 success: "Winning! Although finding clues in HTML code is rare, finding clues or even passwords and API keys in JavaScript code is actually not very uncommon. The combination of the developer tools and some creativity can get you a long way.",
                 readMore: [
                     {
-                        text: "A2:2017-Broken Authentication",
-                        url: "https://owasp.org/www-project-top-ten/2017/A2_2017-Broken_Authentication"
+                        text: "A07:2025-Authentication Failures",
+                        url: "https://owasp.org/Top10/2025/A07_2025-Authentication_Failures/"
                     }
                 ]
             },
@@ -57,8 +57,8 @@ const LEVELS = {
                 success: "Super! It's not uncommon to find files and folders unprotected. Just because there's no link pointing to that location, does not mean no one can find it. Guessing common filenames and cleverly using search engines can get you a long way.",
                 readMore: [
                     {
-                        text: "A5:2017-Broken Access Control",
-                        url: "https://owasp.org/www-project-top-ten/2017/A5_2017-Broken_Access_Control"
+                        text: "A01:2025-Broken Access Control",
+                        url: "https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/"
                     }
                 ]
             },
@@ -72,8 +72,8 @@ const LEVELS = {
                 success: "Very good! That weird text was actually a hash. An MD5 hash to be precise. MD5 is an old algorithm that unfortunately is still used to 'protect' passwords. But as you found out, it can be easy to find the original values of MD5 hashes.",
                 readMore: [
                     {
-                        text: "A3:2017-Sensitive Data Exposure",
-                        url: "https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure"
+                        text: "A04:2025-Cryptographic Failures",
+                        url: "https://owasp.org/Top10/2025/A04_2025-Cryptographic_Failures/"
                     }
                 ]
             },
@@ -87,8 +87,8 @@ const LEVELS = {
                 success: "Boom! It's not uncommon for APIs to share many details. Although they might not all appear on your screen, when you know your way with your web browser's developer tools, you can learn a lot about the API and its backend.",
                 readMore: [
                     {
-                        text: "A3:2017-Sensitive Data Exposure",
-                        url: "https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure"
+                        text: "A02:2025-Security Misconfiguration",
+                        url: "https://owasp.org/Top10/2025/A02_2025-Security_Misconfiguration/"
                     }
                 ]
             },
@@ -100,12 +100,12 @@ const LEVELS = {
                 success: "Top!",
                 readMore: [
                     {
-                        text: "A5:2017-Broken Access Control",
-                        url: "https://owasp.org/www-project-top-ten/2017/A5_2017-Broken_Access_Control"
+                        text: "A01:2025-Broken Access Control",
+                        url: "https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/"
                     },
                     {
-                        text: "A8:2017-Insecure Deserialization",
-                        url: "https://owasp.org/www-project-top-ten/2017/A8_2017-Insecure_Deserialization"
+                        text: "A08:2025-Software or Data Integrity Failures",
+                        url: "https://owasp.org/Top10/2025/A08_2025-Software_or_Data_Integrity_Failures/"
                     }
                 ]
             }

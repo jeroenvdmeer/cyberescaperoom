@@ -11,7 +11,7 @@ import { FiExternalLink } from "react-icons/fi"
 const Success = ({ text, readMore, onClick }) => (
   <Box>
     <Text>{text}</Text>
-    <Text mt={4}>Read more from OWASP about:</Text>
+    <Text mt={4}>Read more from the OWASP Top 10 (2025) about:</Text>
     <List.Root listStyleType="none">
       {Array.isArray(readMore) && readMore.map(link => (
         <List.Item key={link.url}>

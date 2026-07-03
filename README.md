@@ -1,14 +1,14 @@
 # Cyber escape room
-The objective of this project is to provide a playful introduction to web application vulnerabilities in the [OWASP Top 10](https://owasp.org/www-project-top-ten/) while relying only on developer tools offered by modern web browsers. This makes the cyber escape room accessible for anyone who is interested web application vulnerabilities without the need to use specialized tools, such as intercepting proxies.
+The objective of this project is to provide a playful introduction to web application vulnerabilities in the [OWASP Top 10 (2025)](https://owasp.org/Top10/2025/) while relying only on developer tools offered by modern web browsers. This makes the cyber escape room accessible for anyone who is interested web application vulnerabilities without the need to use specialized tools, such as intercepting proxies.
 
 ## Vulnerabilities
 The cyber escape room contains several challenges that trigger users to exploit vulnerabilities in both the front-end web application and the backend APIs. As each challenge can be solved using developer tools of modern web browsers, the challenges rely heavily on using clues found in the front-end code and API responses. After completing all levels, users have experienced exploiting vulnerabilities in the following categories:
 
-* [A2:2017-Broken Authentication](https://owasp.org/www-project-top-ten/2017/A2_2017-Broken_Authentication)
-* [A3:2017-Sensitive Data Exposure](https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure)
-* [A5:2017-Broken Access Control](https://owasp.org/www-project-top-ten/2017/A5_2017-Broken_Access_Control)
-* [A6:2017-Security Misconfiguration](https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration)
-* [A8:2017-Insecure Deserialization](https://owasp.org/www-project-top-ten/2017/A8_2017-Insecure_Deserialization)
+* [A01:2025-Broken Access Control](https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/)
+* [A02:2025-Security Misconfiguration](https://owasp.org/Top10/2025/A02_2025-Security_Misconfiguration/)
+* [A04:2025-Cryptographic Failures](https://owasp.org/Top10/2025/A04_2025-Cryptographic_Failures/)
+* [A07:2025-Authentication Failures](https://owasp.org/Top10/2025/A07_2025-Authentication_Failures/)
+* [A08:2025-Software or Data Integrity Failures](https://owasp.org/Top10/2025/A08_2025-Software_or_Data_Integrity_Failures/)
 
 ## Demo
 The cyber escape room can be taken for a test drive on https://escape.jero.net/.
