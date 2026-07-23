@@ -204,10 +204,10 @@
   dependencies:
     css-tree "^3.0.0"
 
-"@chakra-ui/react@^3.36.0":
-  version "3.36.0"
-  resolved "https://registry.yarnpkg.com/@chakra-ui/react/-/react-3.36.0.tgz#639c37f7773f81f424cef03e902688a41128b7b1"
-  integrity sha512-6AxUbJsC6yyTzPeYL8sxyAL07lflT0NA+S6tcPzEuwdMux+benRMFOpPktnkifWKl/Vq/JD7fhxDyMuDQ4M0gA==
+"@chakra-ui/react@^3.36.1":
+  version "3.36.1"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/react/-/react-3.36.1.tgz#dde9bba2db4b3b250573c3d66e868f908748d94d"
+  integrity sha512-8uPVBdkw9CfwDQSGGmNqx8jLygUanV9virh2dwbj3x02Cu5bmw12ZCRdD/RZ+00+KrklJZlVnmG20y7PwLhyqg==
   dependencies:
     "@ark-ui/react" "5.37.2"
     "@emotion/is-prop-valid" "^1.4.0"
